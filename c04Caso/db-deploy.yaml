@@ -1,0 +1,47 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: kb-db
+  labels:
+    run: kb-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: kb-db
+  template:
+    metadata:
+      generateName: kb-db
+      labels:
+        run: kb-db
+        version: v0.1
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: kb-db
+          image: mysql:5.7
+          imagePullPolicy: Always
+          volumeMounts:
+          - name: sql-volume
+            mountPath: "/docker-entrypoint-initdb.d/"
+          env:
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: db-name
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: db-password
+          ports:
+            - name: db-mysql
+              containerPort: 3306
+      volumes:
+      - configMap:
+          name: db-sql
+        name: sql-volume
+      - name: secret-volume
+        secret:
+          secretName: db-secret
