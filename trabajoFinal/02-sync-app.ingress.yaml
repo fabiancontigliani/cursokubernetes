@@ -11,6 +11,10 @@ items:
 
     name: sync-ing
   spec:
+    tls:
+    - hosts:
+      - sync-fcontigliani.kube.um.edu.ar
+      secretName: letsencrypt-staging
     rules:
     - host: sync-fcontigliani.kube.um.edu.ar
       http:
