@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sync-prod
+  labels:
+    run: sync-prod
+spec:
+  selector:
+    matchLabels:
+      run: sync-prod
+  serviceName: "sync"
+  template:
+    metadata:
+      generateName: sync-prod
+      labels:
+        run: sync-prod
+    spec:
+      initContainers:
+      - name: "remove-lost-found"
+        image: "busybox:1.25.0"
+        imagePullPolicy: "IfNotPresent"
+        command:  ["rm", "-fr", "/config/lost+found"]
+        volumeMounts:
+        - name: syncthing-data2
+          mountPath: /config
+      containers:
+        - name: sync-prod
+          image: linuxserver/syncthing
+          imagePullPolicy: Always
+          ports:
+            - name: sync-prod
+              containerPort: 8384
+          volumeMounts:
+            - mountPath: "/config"
+              name: syncthing-data2
+  volumeClaimTemplates:
+   - metadata:
+       name: syncthing-data2
+     spec:
+       accessModes: [ "ReadWriteOnce" ]
+       storageClassName: "rbd"
+       resources:
+         requests:
+           storage: 1Gi

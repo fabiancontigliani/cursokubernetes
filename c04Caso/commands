@@ -2,3 +2,7 @@ Create kb-secret
  
 kubectl create secret generic kb-secret --from-literal=DATABASE_URL= kb-db://root:secretisimo@kb-db/whois  -o yaml --dry-run > kb-secret.yaml
 
+
+Aplicar el esquema de la base de datos
+
+

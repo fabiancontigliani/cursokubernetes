@@ -1,0 +1,19 @@
+=============== Jun 19, 2019 (UTC) ===============
+03:00:55.534900 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+03:00:55.587794 db@open opening
+03:00:55.597175 version@stat F·[] S·0B[] Sc·[]
+03:00:55.710340 db@janitor F·2 G·0
+03:00:55.710410 db@open done T·122.572204ms
+=============== Jun 21, 2019 (UTC) ===============
+01:48:18.377721 db@close closing
+01:48:18.377889 db@close done T·165.836µs
+=============== Jun 21, 2019 (UTC) ===============
+01:48:19.866712 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+01:48:19.866933 version@stat F·[] S·0B[] Sc·[]
+01:48:19.866944 db@open opening
+01:48:19.866993 journal@recovery F·1
+01:48:19.871226 journal@recovery recovering @1
+01:48:19.949807 memdb@flush created L0@2 N·62 S·1KiB "\x04de..can,v61":"\npr..ion,v3"
+01:48:19.951021 version@stat F·[1] S·1KiB[1KiB] Sc·[0.25]
+01:48:20.072766 db@janitor F·3 G·0
+01:48:20.072996 db@open done T·206.031848ms
